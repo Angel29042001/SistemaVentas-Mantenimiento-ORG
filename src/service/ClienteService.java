@@ -1,33 +1,19 @@
 package service;
 
-import model.Cliente;
-import util.Console;
-import util.Validaciones;
 import repository.IClienteRepository;
 
 public class ClienteService {
+    
+    // Declaración de la dependencia como una abstracción (Interfaz)
+    private final IClienteRepository clienteRepository;
 
-    //Inversión de control: uso de interfaces
-    private IClienteRepository clienteRepo;
-
-    public ClienteService(IClienteRepository repo) {
-        this.clienteRepo = repo;
+    // Inyección de dependencias por constructor
+    public ClienteService(IClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
     }
 
-    // BUG intencional: validarDni está mal en util.Validaciones
-    public void registrarCliente(String dni, String nombre, String tipo) {
-
-        if (!Validaciones.validarDni(dni)) {
-            Console.error("DNI inválido");
-            return;
-        }
-
-        Cliente cliente = new Cliente(dni, nombre, tipo);
-        clienteRepo.guardar(cliente);
-        Console.info("Cliente registrado: " + nombre);
-    }
-
-    public Cliente buscarCliente(String dni) {
-        return clienteRepo.buscarPorDni(dni);
+    public void registrarCliente(Object cliente) {
+        // Lógica de negocio
+        clienteRepository.guardar(cliente);
     }
 }

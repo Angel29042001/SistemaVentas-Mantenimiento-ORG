@@ -1,8 +1,7 @@
 package repository;
 
-import model.Cliente;
 
 public interface IClienteRepository {
-    void guardar(Cliente cliente);
-    Cliente buscarPorDni(String dni);
+    void guardar(Object cliente); // O puedes usar tu entidad Cliente específica
+    Object buscarPorId(Long id);
 }
