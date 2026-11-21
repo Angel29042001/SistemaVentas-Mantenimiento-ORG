@@ -16,4 +16,12 @@ public class ClienteService {
         // Lógica de negocio
         clienteRepository.guardar(cliente);
     }
+    public boolean validarDNI(String dni) {
+    if (dni == null || !dni.matches("\\d{8}")) {
+        System.out.println("ERROR: Cliente inválido");
+        return false;
+    }
+
+    return true;
+}
 }
